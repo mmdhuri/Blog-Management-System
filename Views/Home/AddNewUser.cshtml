@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Add New User";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <p>All Users</p>
+            </div>
+            <div class="card-body">
+                <form class="" method="post" id="AddUserForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" name="FirstName" class="form-control" required placeholder="First Name" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="LastName" class="form-control" required placeholder="Last Name" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="Email" class="form-control" required placeholder="Email" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="Username" class="form-control" required placeholder="Username" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="Password" class="form-control" required placeholder="Password" />
+                            </div>
+                            <div class="">
+                                <input type="button" name="submit" class="btn btn-sm success AddUserButton" value="Submit"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            console.log("Hello World");
+            $("#AddUserForm");
+            $(".AddUserButton").click(function () {
+                var formData = {
+                    FirstName: $("input[name='FirstName']").val(),
+                    LastName: $("input[name='LastName']").val(),
+                    Email: $("input[name='Email']").val(),
+                    Username: $("input[name='Username']").val(),
+                    Password: $("input[name='Password']").val()
+                };
+                console.log(formData);
+                $.ajax({
+                    url: 'https://localhost:7186/api/Home',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        console.log('Data posted successfully');
+                    },
+                });
+            });
+        });
+    </script>
+}
+

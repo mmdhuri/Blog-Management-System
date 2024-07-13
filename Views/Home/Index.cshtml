@@ -1,0 +1,171 @@
+﻿@model Student_Management_System.Models.Home.HomeModel
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section style{
+    <style>
+        .blog-landing-section{
+            background-color:#000000;
+            padding-top:40px;
+        }
+        .blog-main-heading{
+            font-size:45px;
+        }
+        .user-icon{
+            font-size:40px !important;
+        }
+        .common-transparent-btn {
+            transition: .5s ease all;
+        }
+        .common-transparent-btn:hover{
+            background-color:#ffffff;
+            color:#000000;
+            transition:.5s ease all;
+        }
+        @@media (min-width:1024px) {
+            .blog-main-heading {
+                font-size: 55px;
+            }
+        }
+    </style>
+}
+<section class="text-white container">
+    <div class="blog-landing-section ">
+        <div class="row align-items-center">
+            <div class="col-md-5 offset-md-1">
+                <h1 class="text-white blog-main-heading">@Model.BlogName</h1>
+                <div class="row align-items-center py-4">
+                    <div class="col-1 text-center">
+                        <i class="fa-solid fa-circle-user user-icon"></i>
+                    </div>
+                    <div class="col-10">
+                        <p class="mb-0">@Model.CreatedBy</p>
+                        <p class="mb-0">@Model.BlogCreatedDate</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="">@Model.BlogShortDescription</p>
+                    <a class="common-transparent-btn" href="/BlogPost/ViewBlogDetails?BlogId=@Model.BlogId">Read More
+                        @*<svg height="50" width="180">
+                            <polyline points="0,0 180,0 180,50 0,50 0,00">
+                            </polyline>
+                        </svg>*@
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <img src="~/Uploads/BlogImage/@Model.BlogImage" class="w-100 h-100" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="transform-y-lg-20">
+    <div class="container">
+        <div class="row">
+            @if (Model.BlogCategoryList.Count() > 0)
+            {
+                foreach (var items in Model.BlogCategoryList.Take(3))
+                {
+                    <div class="col-md-4">
+                        <div class="card rounded-0 position-relative">
+                            <p class="badge badge-dark mb-0 position-absolute right-0" style=" bottom: 9px; right: 9px;">New</p>
+                            <div class="card-body ">
+                                <div class="row align-items-center">
+                                    <div class="col-2 p-0">
+                                        <img src="~/Uploads/BlogCategoryImage/@items.BlogCategoryImage" class="w-100" height="50" />
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="clamp-text">@Html.Raw(items.BlogCategoryDescription)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+<section class="pt-10 container">
+    <div class="row">
+        @foreach (var items in Model.BlogPostsModelList)
+        {
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 blogWrapper">
+                    <div class="card-header align-items-center px-4">
+                        <p class="mb-0 fs-3">@items.BlogName</p>
+                    </div>
+                    <div class="card-body p-0">
+                        <img src="~/Uploads/BlogImage/@items.BlogImage" class="w-100 h-100" />
+                    </div>
+                    <div class="card-footer p-4 d-flex align-items-center justify-content-between blogWrapper">
+                        <div>
+                            <a class="btn btn-sm btn-primary" href="/BlogPost/ViewBlogDetails?BlogId=@items.BlogId">View Details</a>
+                        </div>
+                        <div class="d-flex button-wrapper">
+                            <div class="icon-wrapper pe-2">
+                                <a href="javascript:void(0)" class="" data-userauthenticated="@(User.Identity.IsAuthenticated ? true : false)" data-islike="@items.IsBlogLike" data-blogid="@items.BlogId" onclick="onFavouriteClick(this,@items.BlogFavouriteId,'Like')">
+                                    <div class="like-button-container">
+                                        <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" class="@((items.IsBlogLike ? "blog-like" : "" )) like-btn-icon">
+                                            <path d="M8 10V20M8 10L4 9.99998V20L8 20M8 10L13.1956 3.93847C13.6886 3.3633 14.4642 3.11604 15.1992 3.29977L15.2467 3.31166C16.5885 3.64711 17.1929 5.21057 16.4258 6.36135L14 9.99998H18.5604C19.8225 9.99998 20.7691 11.1546 20.5216 12.3922L19.3216 18.3922C19.1346 19.3271 18.3138 20 17.3604 20L8 20" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <span class="like-count text-dark">@items.LikeCount</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="icon-wrapper">
+                                <a href="javascript:void(0)" class="fav-btn" data-userauthenticated="@(User.Identity.IsAuthenticated ? true : false)" data-isfavourite="@items.IsBlogFavourite" data-blogid="@items.BlogId" onclick="onFavouriteClick(this,@items.BlogFavouriteId,'Favourite')">
+                                    <div class="love-button-container">
+                                        <svg id="likeButton" width="20" height="20" viewBox="0 0 24 24" fill="none" class="@((items.IsBlogFavourite ? "blog-favourite" : "" )) fav-btn-icon" stroke="#000" stroke-width="2" stroke-linecap="round">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                        </svg>
+                                        <span class="favourite-count text-dark">@items.FavouriteCount</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section scripts{
+    <script src="~/Theme/dist/assets/plugins/custom/tinymce/tinymce.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            tinymce.init({
+                selector: 'textarea.tweet',
+                height: 300,
+                plugins: 'lists code emoticons',
+                toolbar: 'undo redo | styles | bold italic | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'outdent indent | numlist bullist | emoticons',
+                emoticons_append: {
+                    custom_mind_explode: {
+                        keywords: ['brain', 'mind', 'explode', 'blown'],
+                        char: '🤯'
+                    }
+                },
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+            });
+            $(".RemoveImage").click(function () {
+                $("#RemovedBlogImage").val(1);
+                $("#HiddenBlogImage").val("");
+                $(".ImagePreview").remove();
+            });
+
+            $('#likeButton').on('click', function (e) {
+                
+            });
+        });
+
+       
+
+    </script>
+}

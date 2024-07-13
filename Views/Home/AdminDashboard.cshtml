@@ -1,0 +1,149 @@
+﻿@model Student_Management_System.Models.Home.HomeModel
+@{
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section style{
+    <style>
+        .nav-link{
+            outline:0 !important;
+        }
+        .nav-line-tabs{
+            border-bottom:0px;
+        }
+            .nav-line-tabs .nav-item .nav-link.active, .nav-line-tabs .nav-item .nav-link:hover:not(.disabled), .nav-line-tabs .nav-item.show .nav-link {
+                border-bottom: 0px;
+            }
+    </style>    
+}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header align-items-center">
+                <div>
+                    <p class="mb-0 fs-2 fw-bold">Admin Dashboard</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="row nav nav-tabs nav-line-tabs mb-5 fs-6 candidateInner justify-content-between" role="tablist">
+                    <li class="col-xxl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 nav-item mt-10 mt-lg-0" role="presentation">
+                        <a class="nav-link " data-bs-toggle="tab" href="#kt_tab_pane_inner_1" aria-selected="false" role="tab" tabindex="-1">
+                            <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end cyan-bg-color">
+                                <div class="card-body text-white">
+                                    <div class="d-flex">
+                                        <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="@Model.BlogCategoryCount" data-kt-countup-prefix="">0</div>
+                                        <div>
+                                            <p class="fs-2 mb-0 ps-3">System Users</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="col-xxl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 nav-item mt-10 mt-lg-0" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_inner_2" aria-selected="true" role="tab">
+                            <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end dark-bg-grey">
+                                <div class="card-body text-white">
+                                    <div class="d-flex">
+                                        <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="@Model.BlogCategoryCount" data-kt-countup-prefix="">0</div>
+                                        <div>
+                                            <p class="fs-2 mb-0 ps-3">Blog Category</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="col-xxl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 nav-item mt-10 mt-lg-0" role="presentation">
+                        <a class="nav-link " data-bs-toggle="tab" href="#kt_tab_pane_inner_3" aria-selected="false" tabindex="-1" role="tab">
+                            <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end dark-bg-red">
+                                <div class="card-body text-white">
+                                    <div class="d-flex">
+                                        <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="@Model.BlogPostCount" data-kt-countup-prefix="">0</div>
+                                        <div>
+                                            <p class="fs-2 mb-0 ps-3">Blog Posts</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane active show" id="kt_tab_pane_inner_1" role="tabpanel">
+                        text1
+                    </div>
+                    <div class="tab-pane " id="kt_tab_pane_inner_2" role="tabpanel">
+                        text 2
+                    </div>
+                    <div class="tab-pane " id="kt_tab_pane_inner_3" role="tabpanel">
+                        text3
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*@section Scripts{
+    <script>
+        $(document).ready(function () {
+            console.log("Hello World");
+            $.ajax({
+                url: 'https://localhost:7186/api/Home',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log('Success:', data);
+                    var TableRow = "";
+                    for (var i = 0; i < data.length; i++) {
+                        TableRow += "<tr>";
+                        TableRow += "<td class='FisrtName'>" + data[i].firstName + " " + data[i].lastName; +"<td>";
+                        TableRow += "<td class='LastName'>" + data[i].email; +"<td>";
+                        TableRow += "<td class='Username'>" + data[i].username; +"<td>";
+                        TableRow += "<td class='Actions'> <a href='/Home/EditUser?id=" + data[i].userId + "'>Edit</a><td>";
+                        TableRow += "<td class='Actions'> <a href='javascript:void(0)' onclick='deleteUser(this)' data-userid='" + data[i].userId + "'>Delete</a><td>";
+                        TableRow += "</tr>";
+                    }
+                    $("table tbody").html(TableRow);
+                },
+            });
+        });
+        function deleteUser(element) {
+            var id = $(element).attr("data-userid");
+            console.log(id);
+            Swal.fire({
+                title: "Are You Sure?",
+                text: "You won't be able to revert this.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!"
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        cache: false,
+                        url: 'https://localhost:7186/api/Home/' + id,
+                        type: 'DELETE',
+                        success: function (response) {
+                            if (response.response == true) {
+                                Swal.fire(
+                                    "Deleted!",
+                                    "Your Assessment has been deleted.",
+                                    "success"
+                                )
+                            }
+                        },
+                        error: function (error) {
+                            toastr.error("Something Went Wrong.....");
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+}*@
+
+
+

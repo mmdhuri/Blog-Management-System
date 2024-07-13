@@ -1,0 +1,893 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StudentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationUsersDetails">
+          <Key>
+            <PropertyRef Name="ApplicationUserId" />
+          </Key>
+          <Property Name="ApplicationUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailId" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BlogCategory">
+          <Key>
+            <PropertyRef Name="BlogCategoryId" />
+          </Key>
+          <Property Name="BlogCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogCategoryName" Type="nvarchar(max)" />
+          <Property Name="BlogCategoryImage" Type="nvarchar(max)" />
+          <Property Name="BlogCategoryDescription" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogPost">
+          <Key>
+            <PropertyRef Name="BlogId" />
+          </Key>
+          <Property Name="BlogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogCategoryId" Type="int" />
+          <Property Name="BlogName" Type="nvarchar(max)" />
+          <Property Name="BlogShortDescription" Type="nvarchar(max)" />
+          <Property Name="BlogDescription" Type="nvarchar(max)" />
+          <Property Name="BlogImage" Type="nvarchar(max)" />
+          <Property Name="BlogStatus" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogPost_Favorites">
+          <Key>
+            <PropertyRef Name="BlogFavouriteId" />
+          </Key>
+          <Property Name="BlogFavouriteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsFavorite" Type="bit" Nullable="false" />
+          <Property Name="IsLike" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogPost_Likes">
+          <Key>
+            <PropertyRef Name="BlogLikeId" />
+          </Key>
+          <Property Name="BlogLikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsLike" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar(max)" />
+          <Property Name="ContactAddress" Type="nvarchar(max)" />
+          <Property Name="ContactEmail" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ExceptionHandler">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReffrenceID" Type="nvarchar(max)" />
+          <Property Name="Controller" Type="nvarchar(max)" />
+          <Property Name="Method" Type="nvarchar(max)" />
+          <Property Name="StackStrace" Type="nvarchar(max)" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ApplicationUsers_ApplicationUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="ApplicationUsersDetails" Type="Self.ApplicationUsersDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationUsersDetails">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_BlogCategory">
+          <End Role="BlogCategory" Type="Self.BlogCategory" Multiplicity="0..1" />
+          <End Role="BlogPost" Type="Self.BlogPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategory">
+              <PropertyRef Name="BlogCategoryId" />
+            </Principal>
+            <Dependent Role="BlogPost">
+              <PropertyRef Name="BlogCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Favorites_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="BlogPost_Favorites" Type="Self.BlogPost_Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogPost_Favorites">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Favorites_BlogPost">
+          <End Role="BlogPost" Type="Self.BlogPost" Multiplicity="0..1" />
+          <End Role="BlogPost_Favorites" Type="Self.BlogPost_Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogPost">
+              <PropertyRef Name="BlogId" />
+            </Principal>
+            <Dependent Role="BlogPost_Favorites">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Likes_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="BlogPost_Likes" Type="Self.BlogPost_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogPost_Likes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Likes_BlogPost">
+          <End Role="BlogPost" Type="Self.BlogPost" Multiplicity="0..1" />
+          <End Role="BlogPost_Likes" Type="Self.BlogPost_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogPost">
+              <PropertyRef Name="BlogId" />
+            </Principal>
+            <Dependent Role="BlogPost_Likes">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExceptionHandler]_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="ExceptionHandler" Type="Self.ExceptionHandler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExceptionHandler">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentManagementSystemModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationUsersDetails" EntityType="Self.ApplicationUsersDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogCategory" EntityType="Self.BlogCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogPost" EntityType="Self.BlogPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogPost_Favorites" EntityType="Self.BlogPost_Favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogPost_Likes" EntityType="Self.BlogPost_Likes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExceptionHandler" EntityType="Self.ExceptionHandler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ApplicationUsers_ApplicationUsers" Association="Self.FK_ApplicationUsers_ApplicationUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ApplicationUsersDetails" EntitySet="ApplicationUsersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_BlogCategory" Association="Self.FK_BlogPost_BlogCategory">
+            <End Role="BlogCategory" EntitySet="BlogCategory" />
+            <End Role="BlogPost" EntitySet="BlogPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Favorites_AspNetUsers" Association="Self.FK_BlogPost_Favorites_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BlogPost_Favorites" EntitySet="BlogPost_Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Favorites_BlogPost" Association="Self.FK_BlogPost_Favorites_BlogPost">
+            <End Role="BlogPost" EntitySet="BlogPost" />
+            <End Role="BlogPost_Favorites" EntitySet="BlogPost_Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Likes_AspNetUsers" Association="Self.FK_BlogPost_Likes_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BlogPost_Likes" EntitySet="BlogPost_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Likes_BlogPost" Association="Self.FK_BlogPost_Likes_BlogPost">
+            <End Role="BlogPost" EntitySet="BlogPost" />
+            <End Role="BlogPost_Likes" EntitySet="BlogPost_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExceptionHandler]_AspNetUsers" Association="Self.FK_ExceptionHandler]_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ExceptionHandler" EntitySet="ExceptionHandler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StudentManagementSystemEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="C__MigrationHistory" EntityType="StudentManagementSystemModel.C__MigrationHistory" />
+          <EntitySet Name="ApplicationUsersDetails" EntityType="StudentManagementSystemModel.ApplicationUsersDetail" />
+          <EntitySet Name="AspNetRoles" EntityType="StudentManagementSystemModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="StudentManagementSystemModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="StudentManagementSystemModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="StudentManagementSystemModel.AspNetUser" />
+          <EntitySet Name="BlogCategories" EntityType="StudentManagementSystemModel.BlogCategory" />
+          <EntitySet Name="BlogPosts" EntityType="StudentManagementSystemModel.BlogPost" />
+          <EntitySet Name="BlogPost_Favorites" EntityType="StudentManagementSystemModel.BlogPost_Favorites" />
+          <EntitySet Name="BlogPost_Likes" EntityType="StudentManagementSystemModel.BlogPost_Likes" />
+          <EntitySet Name="Contacts" EntityType="StudentManagementSystemModel.Contact" />
+          <EntitySet Name="ExceptionHandlers" EntityType="StudentManagementSystemModel.ExceptionHandler" />
+          <AssociationSet Name="FK_ApplicationUsers_ApplicationUsers" Association="StudentManagementSystemModel.FK_ApplicationUsers_ApplicationUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="ApplicationUsersDetail" EntitySet="ApplicationUsersDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="StudentManagementSystemModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="StudentManagementSystemModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Favorites_AspNetUsers" Association="StudentManagementSystemModel.FK_BlogPost_Favorites_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="BlogPost_Favorites" EntitySet="BlogPost_Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Likes_AspNetUsers" Association="StudentManagementSystemModel.FK_BlogPost_Likes_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="BlogPost_Likes" EntitySet="BlogPost_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExceptionHandler__AspNetUsers" Association="StudentManagementSystemModel.FK_ExceptionHandler__AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="ExceptionHandler" EntitySet="ExceptionHandlers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_BlogCategory" Association="StudentManagementSystemModel.FK_BlogPost_BlogCategory">
+            <End Role="BlogCategory" EntitySet="BlogCategories" />
+            <End Role="BlogPost" EntitySet="BlogPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Favorites_BlogPost" Association="StudentManagementSystemModel.FK_BlogPost_Favorites_BlogPost">
+            <End Role="BlogPost" EntitySet="BlogPosts" />
+            <End Role="BlogPost_Favorites" EntitySet="BlogPost_Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPost_Likes_BlogPost" Association="StudentManagementSystemModel.FK_BlogPost_Likes_BlogPost">
+            <End Role="BlogPost" EntitySet="BlogPosts" />
+            <End Role="BlogPost_Likes" EntitySet="BlogPost_Likes" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="StudentManagementSystemModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ApplicationUsersDetail">
+          <Key>
+            <PropertyRef Name="ApplicationUserId" />
+          </Key>
+          <Property Name="ApplicationUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="StudentManagementSystemModel.FK_ApplicationUsers_ApplicationUsers" FromRole="ApplicationUsersDetail" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="StudentManagementSystemModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="StudentManagementSystemModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="StudentManagementSystemModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ApplicationUsersDetails" Relationship="StudentManagementSystemModel.FK_ApplicationUsers_ApplicationUsers" FromRole="AspNetUser" ToRole="ApplicationUsersDetail" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="StudentManagementSystemModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="StudentManagementSystemModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="BlogPost_Favorites" Relationship="StudentManagementSystemModel.FK_BlogPost_Favorites_AspNetUsers" FromRole="AspNetUser" ToRole="BlogPost_Favorites" />
+          <NavigationProperty Name="BlogPost_Likes" Relationship="StudentManagementSystemModel.FK_BlogPost_Likes_AspNetUsers" FromRole="AspNetUser" ToRole="BlogPost_Likes" />
+          <NavigationProperty Name="ExceptionHandlers" Relationship="StudentManagementSystemModel.FK_ExceptionHandler__AspNetUsers" FromRole="AspNetUser" ToRole="ExceptionHandler" />
+          <NavigationProperty Name="AspNetRoles" Relationship="StudentManagementSystemModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="BlogCategory">
+          <Key>
+            <PropertyRef Name="BlogCategoryId" />
+          </Key>
+          <Property Name="BlogCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogCategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogCategoryImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogCategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BlogPosts" Relationship="StudentManagementSystemModel.FK_BlogPost_BlogCategory" FromRole="BlogCategory" ToRole="BlogPost" />
+        </EntityType>
+        <EntityType Name="BlogPost">
+          <Key>
+            <PropertyRef Name="BlogId" />
+          </Key>
+          <Property Name="BlogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogCategoryId" Type="Int32" />
+          <Property Name="BlogName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogShortDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogStatus" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BlogCategory" Relationship="StudentManagementSystemModel.FK_BlogPost_BlogCategory" FromRole="BlogPost" ToRole="BlogCategory" />
+          <NavigationProperty Name="BlogPost_Favorites" Relationship="StudentManagementSystemModel.FK_BlogPost_Favorites_BlogPost" FromRole="BlogPost" ToRole="BlogPost_Favorites" />
+          <NavigationProperty Name="BlogPost_Likes" Relationship="StudentManagementSystemModel.FK_BlogPost_Likes_BlogPost" FromRole="BlogPost" ToRole="BlogPost_Likes" />
+        </EntityType>
+        <EntityType Name="BlogPost_Favorites">
+          <Key>
+            <PropertyRef Name="BlogFavouriteId" />
+          </Key>
+          <Property Name="BlogFavouriteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsFavorite" Type="Boolean" Nullable="false" />
+          <Property Name="IsLike" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="StudentManagementSystemModel.FK_BlogPost_Favorites_AspNetUsers" FromRole="BlogPost_Favorites" ToRole="AspNetUser" />
+          <NavigationProperty Name="BlogPost" Relationship="StudentManagementSystemModel.FK_BlogPost_Favorites_BlogPost" FromRole="BlogPost_Favorites" ToRole="BlogPost" />
+        </EntityType>
+        <EntityType Name="BlogPost_Likes">
+          <Key>
+            <PropertyRef Name="BlogLikeId" />
+          </Key>
+          <Property Name="BlogLikeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsLike" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="StudentManagementSystemModel.FK_BlogPost_Likes_AspNetUsers" FromRole="BlogPost_Likes" ToRole="AspNetUser" />
+          <NavigationProperty Name="BlogPost" Relationship="StudentManagementSystemModel.FK_BlogPost_Likes_BlogPost" FromRole="BlogPost_Likes" ToRole="BlogPost" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ExceptionHandler">
+          <Key>
+            <PropertyRef Name="ExceptionID" />
+          </Key>
+          <Property Name="ExceptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReffrenceID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Method" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StackStrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="StudentManagementSystemModel.FK_ExceptionHandler__AspNetUsers" FromRole="ExceptionHandler" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_ApplicationUsers_ApplicationUsers">
+          <End Type="StudentManagementSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="StudentManagementSystemModel.ApplicationUsersDetail" Role="ApplicationUsersDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationUsersDetail">
+              <PropertyRef Name="AspNetUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="StudentManagementSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="StudentManagementSystemModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="StudentManagementSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="StudentManagementSystemModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Favorites_AspNetUsers">
+          <End Type="StudentManagementSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="StudentManagementSystemModel.BlogPost_Favorites" Role="BlogPost_Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogPost_Favorites">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Likes_AspNetUsers">
+          <End Type="StudentManagementSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="StudentManagementSystemModel.BlogPost_Likes" Role="BlogPost_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogPost_Likes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExceptionHandler__AspNetUsers">
+          <End Type="StudentManagementSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="StudentManagementSystemModel.ExceptionHandler" Role="ExceptionHandler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExceptionHandler">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_BlogCategory">
+          <End Type="StudentManagementSystemModel.BlogCategory" Role="BlogCategory" Multiplicity="0..1" />
+          <End Type="StudentManagementSystemModel.BlogPost" Role="BlogPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategory">
+              <PropertyRef Name="BlogCategoryId" />
+            </Principal>
+            <Dependent Role="BlogPost">
+              <PropertyRef Name="BlogCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Favorites_BlogPost">
+          <End Type="StudentManagementSystemModel.BlogPost" Role="BlogPost" Multiplicity="0..1" />
+          <End Type="StudentManagementSystemModel.BlogPost_Favorites" Role="BlogPost_Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogPost">
+              <PropertyRef Name="BlogId" />
+            </Principal>
+            <Dependent Role="BlogPost_Favorites">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPost_Likes_BlogPost">
+          <End Type="StudentManagementSystemModel.BlogPost" Role="BlogPost" Multiplicity="0..1" />
+          <End Type="StudentManagementSystemModel.BlogPost_Likes" Role="BlogPost_Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogPost">
+              <PropertyRef Name="BlogId" />
+            </Principal>
+            <Dependent Role="BlogPost_Likes">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="StudentManagementSystemModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="StudentManagementSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentManagementSystemModelStoreContainer" CdmEntityContainer="StudentManagementSystemEntities" >
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationUsersDetails">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.ApplicationUsersDetail">
+              <MappingFragment StoreEntitySet="ApplicationUsersDetails">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="ApplicationUserId" ColumnName="ApplicationUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogCategories">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.BlogCategory">
+              <MappingFragment StoreEntitySet="BlogCategory">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BlogCategoryDescription" ColumnName="BlogCategoryDescription" />
+                <ScalarProperty Name="BlogCategoryImage" ColumnName="BlogCategoryImage" />
+                <ScalarProperty Name="BlogCategoryName" ColumnName="BlogCategoryName" />
+                <ScalarProperty Name="BlogCategoryId" ColumnName="BlogCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogPosts">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.BlogPost">
+              <MappingFragment StoreEntitySet="BlogPost">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BlogStatus" ColumnName="BlogStatus" />
+                <ScalarProperty Name="BlogImage" ColumnName="BlogImage" />
+                <ScalarProperty Name="BlogDescription" ColumnName="BlogDescription" />
+                <ScalarProperty Name="BlogShortDescription" ColumnName="BlogShortDescription" />
+                <ScalarProperty Name="BlogName" ColumnName="BlogName" />
+                <ScalarProperty Name="BlogCategoryId" ColumnName="BlogCategoryId" />
+                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogPost_Favorites">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.BlogPost_Favorites">
+              <MappingFragment StoreEntitySet="BlogPost_Favorites">
+                <ScalarProperty Name="IsLike" ColumnName="IsLike" />
+                <ScalarProperty Name="IsFavorite" ColumnName="IsFavorite" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+                <ScalarProperty Name="BlogFavouriteId" ColumnName="BlogFavouriteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogPost_Likes">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.BlogPost_Likes">
+              <MappingFragment StoreEntitySet="BlogPost_Likes">
+                <ScalarProperty Name="IsLike" ColumnName="IsLike" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+                <ScalarProperty Name="BlogLikeId" ColumnName="BlogLikeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactAddress" ColumnName="ContactAddress" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExceptionHandlers">
+            <EntityTypeMapping TypeName="StudentManagementSystemModel.ExceptionHandler">
+              <MappingFragment StoreEntitySet="ExceptionHandler">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="StackStrace" ColumnName="StackStrace" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="ReffrenceID" ColumnName="ReffrenceID" />
+                <ScalarProperty Name="ExceptionID" ColumnName="ExceptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="StudentManagementSystemModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

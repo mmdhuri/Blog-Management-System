@@ -1,0 +1,145 @@
+﻿
+<!--begin::Header-->
+<div id="kt_app_header" class="app-header">
+    <!--begin::Header primary-->
+    <div class="app-header-primary" data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky" data-kt-sticky-offset="{default: 'false', lg: '300px'}">
+        <!--begin::Header primary container-->
+        <div class="app-container container-fluid d-flex align-items-stretch justify-content-between home-header">
+            <!--begin::Header primary-->
+            <div class="d-flex align-items-center align-items-stretch justify-content-between flex-row-fluid" id="kt_app_header_wrapper">
+                <!--begin::Header logo-->
+                <div class="app-header-logo d-flex align-items-center">
+                    <!--begin::Mobile toggle-->
+                    <div class="btn btn-icon btn-color-gray-500 btn-active-color-primary w-35px h-35px ms-n3 me-2 d-flex d-lg-none" id="kt_app_header_menu_toggle">
+                        <i class="ki-outline ki-abstract-14 fs-1"></i>
+                    </div>
+                    <!--end::Mobile toggle-->
+                    <!--begin::Logo image-->
+                    <a href="/">
+                        <img src="~/Uploads/blog-logo.png" class="w-100" />
+                    </a>
+                    <!--end::Logo image-->
+                </div>
+                <!--end::Header logo-->
+                <!--begin::Menu wrapper-->
+                <div class="d-flex align-items-center" id="kt_app_header_menu_wrapper">
+                    <!--begin::Menu holder-->
+                    <div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="app-header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_header_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_menu_wrapper'}">
+                        <!--begin::Menu-->
+                        <div class="menu menu-rounded menu-column menu-lg-row menu-active-bg menu-title-gray-600 menu-state-dark menu-arrow-gray-400 fw-semibold fw-semibold fs-6 align-items-stretch my-5 my-lg-0 px-2 px-lg-0" id="#kt_app_header_menu" data-kt-menu="true">
+                            <!--begin:Menu item-->
+                            <div class="menu-item me-0 me-lg-2">
+                                <a class="menu-link" href="/Home/Index">
+                                    <span class="menu-title ">Home</span>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                </a>
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item me-0 me-lg-2">
+                                <a class="menu-link" href="/Home/About">
+                                    <span class="menu-title ">About Us</span>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                </a>
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item me-0 me-lg-2">
+                                <a class="menu-link" href="/Home/Contact">
+                                    <span class="menu-title ">Contact Us</span>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                </a>
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
+                        <!--end::Menu-->
+                    </div>
+                    <!--end::Menu holder-->
+                </div>
+                <!--end::Menu wrapper-->
+                <!--begin::Navbar-->
+                <div class="app-navbar flex-shrink-0">
+                    <div class="app-navbar-item ms-2 ms-md-5" id="kt_header_user_menu_toggle">
+
+                        <!--begin::Menu wrapper-->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="cursor-pointer symbol symbol-35px symbol-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                
+
+                                <img class="symbol symbol-35px symbol-md-40px" src="~/theme/dist/assets/media/avatars/300-5.jpg" alt="user" />
+                            </div>
+                            <!--begin::User account menu-->
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <div class="menu-content d-flex align-items-center px-3">
+                                        <!--begin::Avatar-->
+                                        <div class="symbol symbol-50px me-5">
+                                            <img alt="Logo" src="~/theme/dist/assets/media/avatars/300-5.jpg" />
+                                        </div>
+                                        <!--end::Avatar-->
+                                        <!--begin::Username-->
+                                        <div class="d-flex flex-column">
+                                            <div class="fw-bold d-flex align-items-center fs-5">
+                                                @Html.Raw(Student_Management_System.Models.Home.HomeModel.GetLoginUserFullName())
+                                                <i class="fa-solid fa-circle ms-2 text-green-glow blink green-color"></i>
+                                            </div>
+                                        </div>
+                                        <!--end::Username-->
+                                    </div>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu separator-->
+                                <div class="separator my-2"></div>
+                                <!--end::Menu separator-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-5">
+                                    <a href="/Account/MyProfile" class="menu-link px-5">My Profile</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <div class="menu-item ">
+                                    <div class="menu-item px-5">
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right w-100" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="menu-link px-5">Sign Out</a>
+                                    }
+                                    </div>
+
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::User account menu-->
+                            <!--end::Menu wrapper-->
+                        }
+                        else
+                        {
+                            <div class="menu menu-rounded menu-column menu-lg-row menu-active-bg menu-title-gray-600 menu-state-dark menu-arrow-gray-400 fw-semibold fw-semibold fs-6 align-items-stretch my-5 my-lg-0 px-2 px-lg-0" id="#kt_app_header_menu" data-kt-menu="true">
+                                <div class="menu-item me-0 me-lg-2">
+                                    <a class="menu-link" href="/Account/Login">
+                                        <span class="menu-title ">Login</span>
+                                        <span class="menu-arrow d-lg-none"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <!--end::User menu-->
+                    <!--begin::Sidebar menu toggle-->
+                    <div class="app-navbar-item d-flex align-items-center d-lg-none ms-1 me-n2">
+                        <a href="#" class="btn btn-icon btn-color-gray-500 btn-active-color-primary w-35px h-35px" id="kt_app_sidebar_mobile_toggle">
+                            <i class="ki-outline ki-text-align-left fs-1"></i>
+                        </a>
+                    </div>
+                    <!--end::Sidebar menu toggle-->
+                    </div>
+                <!--end::Navbar-->
+            </div>
+            <!--end::Header primary-->
+        </div>
+        <!--end::Header primary container-->
+    </div>
+</div>
+<!--end::Header-->

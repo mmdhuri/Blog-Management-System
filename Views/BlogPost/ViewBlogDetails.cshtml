@@ -1,0 +1,75 @@
+﻿@model Student_Management_System.Models.BlogPosts.BlogPostsModel 
+@{
+    ViewBag.Title = "ViewBlogDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-20">
+    <div class="container">
+        <div class="card px-20">
+            <div class="card-header justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0 fs-3 fw-bold">Blog Details</h1>
+                </div>
+                <div>
+                    <a href="/" class="btn btn-sm btn-primary">Back to home</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-between">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p class="mb-0 fw-semibold fs-5">Blog Name:- </p>
+                            </div>
+                            <div class="col-md-10">
+                                @Model.BlogName
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p class="mb-0 fw-semibold fs-5">Blog Category:- </p>
+                            </div>
+                            <div class="col-md-10">
+                                @Model.BlogCategory
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <div class="d-flex button-wrapper justify-content-end">
+                            <div class="icon-wrapper pe-2">
+                                <a href="javascript:void(0)" class="" data-userauthenticated="@(User.Identity.IsAuthenticated ? true : false)" data-islike="@Model.IsBlogLike" data-blogid="@Model.BlogId" onclick="onFavouriteClick(this,@Model.BlogFavouriteId,'Like')">
+                                    <div class="like-button-container">
+                                        <svg width="21px" height="21px" viewBox="0 0 24 24" fill="none" class="@((Model.IsBlogLike ? "blog-like" : "" )) like-btn-icon">
+                                            <path d="M8 10V20M8 10L4 9.99998V20L8 20M8 10L13.1956 3.93847C13.6886 3.3633 14.4642 3.11604 15.1992 3.29977L15.2467 3.31166C16.5885 3.64711 17.1929 5.21057 16.4258 6.36135L14 9.99998H18.5604C19.8225 9.99998 20.7691 11.1546 20.5216 12.3922L19.3216 18.3922C19.1346 19.3271 18.3138 20 17.3604 20L8 20" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <span class="like-count text-dark">@Model.LikeCount</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="icon-wrapper">
+                                <a href="javascript:void(0)" class="fav-btn" data-userauthenticated="@(User.Identity.IsAuthenticated ? true : false)" data-isfavourite="@Model.IsBlogFavourite" data-blogid="@Model.BlogId" onclick="onFavouriteClick(this,@Model.BlogFavouriteId,'Favourite')">
+                                    <div class="love-button-container">
+                                        <svg id="likeButton" width="20" height="20" viewBox="0 0 24 24" fill="none" class="@((Model.IsBlogFavourite ? "blog-favourite" : "" )) fav-btn-icon" stroke="#000" stroke-width="2" stroke-linecap="round">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                        </svg>
+                                        <span class="favourite-count text-dark">@Model.FavouriteCount</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="py-10">
+                    <img src="~/Uploads/BlogImage/@Model.BlogImage" class="w-100 "/>
+                    <div class="pt-10">
+                        @Html.Raw(Model.BlogDescription)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

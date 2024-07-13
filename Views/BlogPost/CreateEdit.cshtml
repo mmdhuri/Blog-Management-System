@@ -1,0 +1,107 @@
+﻿@model Student_Management_System.Models.BlogPosts.BlogPostsModel
+@{
+    ViewBag.Title = "Blog Post";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("CreateEdit", "BlogPost", FormMethod.Post, new { @id = "", @enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.BlogId)
+    <div class="card">
+        <div class="card-header align-items-center">
+            <h1>Create Category</h1>
+            <div class="">
+                <a href="/BlogPost/Index" class="btn btn-sm btn-secondary">Back To List</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <label>Blog Category</label>
+                    @*@Html.DropDownListFor(m => m.BlogCategoryId, Model.BlogCategorySelectList, new { @class = "form-control select2", })*@
+                    <select name="BlogCategoryId" class="form-select" data-control="select2" data-placeholder="Select an option">
+                        @foreach (var items in Model.BlogCategorySelectList)
+                        {
+                            <option value="@items.Value" @(items.Value == Model.BlogCategoryId.ToString() ? "selected" : "")>@items.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Blog Name</label>
+                    @Html.TextBoxFor(m => m.BlogName, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    <label>Blog Status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" name="BlogStatus" type="checkbox" value="true" id="flexCheckDefault" @(Model.BlogStatus ? "checked" : "") />
+                        <label class="form-check-label mt-2" for="flexCheckDefault">
+                            IsActive
+                        </label>
+                    </div>
+                    @*<input type="checkbox" name="BlogStatus" @(Model.BlogStatus ? "checked" : "") class="" />*@
+                </div>
+            </div>
+            <div class="row justify-content-center pt-10">
+                <div class="col-md-6">
+                    <label>Blog Description</label>
+
+                    @Html.TextAreaFor(m => m.BlogDescription, new { @class = "form-control BlogDescription" })
+                </div>
+                <div class="col-md-3">
+                    <label>Blog Image</label>
+                    <input type="file" name="BlogFile" accept="jpg,png,jpeg" class="form-control" />
+                    @if (Model.BlogImage != null)
+                    {
+                        <div class="ImagePreview mt-4">
+                            <div class="text-end">
+                                <a href="javascript:void(0)" class="RemoveImage btn btn-sm btn-danger rounded">X</a>
+                            </div>
+                            <img src="~/Uploads/BlogImage/@Model.BlogImage" class="img-thumbnail w-100" height="300" />
+
+                        </div>
+                        <input type="hidden" name="RemovedBlogImage" value="0" id="RemovedBlogImage" />
+                        <input type="hidden" name="HiddenBlogImage" value="@Model.BlogImage" id="HiddenBlogImage" />
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script src="~/Theme/dist/assets/plugins/custom/tinymce/tinymce.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            tinymce.init({
+                selector: '.BlogDescription',
+                plugins: 'quickbars image lists code table codesample paste',
+                toolbar: 'blocks | forecolor backcolor | bold italic underline strikethrough | link image blockquote codesample | align bullist numlist | code ',
+                height: "400",
+                image_title: true,
+                automatic_uploads: true,
+                file_picker_types: 'image',
+                paste_data_images: true,
+                paste_as_text: true,
+                images_upload_url: '/BlogPost/UploadBlogEditorImage',
+                paste_auto_cleanup_on_paste: true,
+                powerpaste_block_drop: false,
+                setup: function (editor) {
+                    editor.on('change', function () {
+                        editor.save();
+                    });
+                },
+                images_dataimg_filter: function (img) {
+                    return !img.hasAttribute('internal-blob');  // blocks the upload of <img> elements with the attribute "internal-blob".
+                }
+            });
+            $(".RemoveImage").click(function () {
+                $("#RemovedBlogImage").val(1);
+                $("#HiddenBlogImage").val("");
+                $(".ImagePreview").remove();
+            });
+        });
+    </script>
+}

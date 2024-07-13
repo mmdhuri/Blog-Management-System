@@ -1,0 +1,55 @@
+﻿@model Student_Management_System.Models.BlogCategorys.BlogCategoryModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 1;
+}
+@section style{
+    <link href="~/Theme/dist/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" />
+}
+<div class="card">
+    <div class="card-header align-items-center">
+        <h1>Blog Category List</h1>
+        <div class="">
+            <a href="/BlogCategory/CreateEdit" class="btn btn-sm btn-primary">Create BlogCategory</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover" id="Blog-Category-Table">
+            <thead>
+                <tr>
+                    <th>SR No.</th>
+                    <th>Blog Category Name</th>
+                    <th>Blog Category Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.BlogCategoryList.Count() > 0)
+                {
+                    foreach (var items in Model.BlogCategoryList)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@items.BlogCategoryName</td>
+                            <td>@Html.Raw(items.BlogCategoryDescription)</td>
+                            <td>
+                                <a href="/BlogCategory/CreateEdit?BlogCategoryId=@items.BlogCategoryId"><i class="fa fa-edit"></i></a>
+                                <a href="javascript:void(0)" class="" data-url="/BlogCategory/Delete?id=@items.BlogCategoryId" data-id="@items.BlogCategoryId" onclick="onClickDelete(this)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Theme/dist/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Blog-Category-Table").DataTable();  
+        });
+    </script>
+}

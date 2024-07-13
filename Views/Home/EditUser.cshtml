@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <p>All Users</p>
+            </div>
+            <div class="card-body">
+                <form class="" id="AddUserForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" name="FirstName" class="form-control firstname" required placeholder="First Name" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="LastName" class="form-control lastname" required placeholder="Last Name" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="Email" class="form-control email" required placeholder="Email" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="Username" class="form-control username" required placeholder="Username" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="Password" class="form-control password" required placeholder="Password" readonly/>
+                            </div>
+                            <div class="">
+                                <input type="button" name="submit" class="btn btn-sm success EditUserButton" value="Submit" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            console.log("Hello World");
+            // Get the ID from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            $.ajax({
+                url: 'https://localhost:7186/api/Home/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log('Success:', data);
+                    $('.firstname').val(data.firstName);
+                    $('.lastname').val(data.lastName);
+                    $('.email').val(data.email);
+                    $('.username').val(data.username);
+                    $('.password').val(data.password);
+                },
+            });
+
+
+            $(".EditUserButton").click(function () {
+                var formData = {
+                    FirstName: $("input[name='FirstName']").val(),
+                    LastName: $("input[name='LastName']").val(),
+                    Email: $("input[name='Email']").val(),
+                    Username: $("input[name='Username']").val(),
+                    Password: $("input[name='Password']").val()
+                };
+                console.log(formData);
+                $.ajax({
+                    url: 'https://localhost:7186/api/Home/' + id,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        console.log('Data posted successfully');
+                    },
+                });
+            });
+        });
+    </script>
+}

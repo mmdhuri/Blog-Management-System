@@ -1,0 +1,60 @@
+﻿@model Student_Management_System.Models.BlogPosts.BlogPostsModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 1;
+}
+
+@section style{
+    <link href="~/Theme/dist/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" />
+}
+<div class="card">
+    <div class="card-header align-items-center">
+        <h1>Blog Category List</h1>
+        <div class="">
+            <a href="/BlogPost/CreateEdit" class="btn btn-sm btn-primary">Create Blog Post</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover" id="Blog-Category-Table">
+            <thead>
+                <tr>
+                    <th>SR No.</th>
+                    <th>Blog Category</th>
+                    <th>Blog Name</th>
+                    <th>Blog Description</th>
+                    <th>Blog Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.BlogPostsList.Count() > 0)
+                {
+                    foreach (var items in Model.BlogPostsList)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@items.BlogCategory.BlogCategoryName</td>
+                            <td>@items.BlogName</td>
+                            <td>@Html.Raw(items.BlogDescription)</td>
+                            <td>@(items.BlogStatus ? "Active": "InActive")</td>
+                            <td>
+                                <a href="/BlogPost/CreateEdit?BlogId=@items.BlogId"><i class="fa fa-edit"></i></a>
+                                <a href="javascript:void(0)" class="" data-url="/BlogPost/Delete?id=@items.BlogId" data-id="@items.BlogId" onclick="onClickDelete(this)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Theme/dist/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Blog-Category-Table").DataTable();
+        });
+    </script>
+}
