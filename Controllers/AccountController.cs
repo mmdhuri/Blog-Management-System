@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Student_Management_System.Interface.Services.ApplicationUserDetails;
 using Student_Management_System.Interface.Services.EmailServices;
 using Student_Management_System.Models;
+using Student_Management_System.Models.Profile;
 
 namespace Student_Management_System.Controllers
 {
@@ -631,5 +632,18 @@ namespace Student_Management_System.Controllers
             }
         }
         #endregion
+
+        public ActionResult MyProfile()
+        {
+            var model = new ProfileModel();
+            var LoggedUserId = User.Identity.GetUserId();
+            var UserData = _applicationUserDetailsService.GetAppUserById(LoggedUserId);
+            model.FirstName = UserData.FirstName;
+            model.LastName = UserData.LastName;
+            model.Emailid = UserData.EmailId;
+            model.Phonenumber = UserData.PhoneNumber;
+            model.ProfileImage = UserData.ProfilePath;
+            return View(model);
+        }
     }
 }

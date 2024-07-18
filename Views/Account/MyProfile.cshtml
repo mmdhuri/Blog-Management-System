@@ -1,0 +1,48 @@
+﻿@model Student_Management_System.Models.Profile.ProfileModel
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section style{
+    <style>
+        .Profile-cover-image{
+        background-image: url('@(Model.ProfileCoverImagePath != null && Model.ProfileCoverImagePath != "" ? Url.Content(Model.ProfileCoverImagePath) : Url.Content("~/Uploads/Profile-Images/river-wallpaper-hd-3.jpg"))');
+            background-attachment:fixed;
+            padding:170px 40px;
+            background-repeat:no-repeat;
+            background-size:cover;
+        }
+        .profile-image-wrapper{
+            bottom:-20px;
+        }
+    </style>
+}
+<section class="myprofile-landing-section position-relative">
+    <div class="container">
+        <div class="Profile-cover-image">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card profile-image-wrapper position-absolute">
+                        <div class="card-body">
+                            <div class="">
+                                <div class="">
+
+                                </div>
+                                <div>
+                                    <span href="#" class="text-gray-900  fs-2 fw-bold me-1">@Model.FirstName @Model.LastName</span>
+                                    <a href="#"><i class="ki-outline ki-verify fs-1 text-primary"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </div>
+</section>
+

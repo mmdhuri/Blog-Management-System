@@ -25,6 +25,7 @@
           <Property Name="LastName" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="EmailId" Type="nvarchar(max)" />
+          <Property Name="ProfilePath" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -436,6 +437,7 @@
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -722,6 +724,7 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProfilePath" ColumnName="ProfilePath" />
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
